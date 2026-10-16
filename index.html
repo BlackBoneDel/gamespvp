@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="classic">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══ SEO básico ═══ -->
+  <title>Games PvP — Guías y técnicas de gaming</title>
+  <meta name="description" content="Games PvP: guías, técnicas y videos de Minecraft PvP, Minecraft Speedrun, Cuphead, Hollow Knight, recomendaciones de salud y periféricos. Especializado en Minecraft PvP." />
+  <meta name="author" content="Games PvP" />
+  <meta name="theme-color" content="#000000" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Games PvP — Guías y técnicas de gaming" />
+  <meta property="og:description" content="Guías, técnicas y videos creados por los mayores jugadores de cada videojuego. Especializado en Minecraft PvP." />
+  <meta property="og:site_name" content="Games PvP" />
+
+  <!-- ═══ Tipografías web ═══
+       Google Fonts: Press Start 2P (pixel), Alegreya Sans (Cuphead),
+       Cinzel (sustituto libre de Trajan Pro), EB Garamond (Hollow Knight),
+       Roboto + Open Sans (general / opciones de usuario).
+       Monocraft (estilo chat de Minecraft) se sirve localmente vía @font-face en styles.css. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Cinzel:wght@400..900&family=EB+Garamond:ital,wght@0,400..700;1,400&family=Open+Sans:wght@300..800&family=Press+Start+2P&family=Roboto:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000'/%3E%3Ctext x='50' y='72' font-size='62' text-anchor='middle' fill='%23fff' font-family='monospace' font-weight='bold'%3E1%3C/text%3E%3C/svg%3E" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Accesibilidad: salto directo al contenido -->
+  <a class="skip-link" href="#main-content" data-i18n="skipToContent">Saltar al contenido principal</a>
+
+  <!-- ════════════════════════════════════════════
+       1. PANTALLA DE CARGA / SPLASH SCREEN
+       Logo "Games PvP" sobre un gran "1" (ranking #1),
+       animación de rebote en bucle + fade-out de salida.
+  ════════════════════════════════════════════ -->
+  <div id="splash" class="splash" role="status" aria-live="polite">
+    <div class="splash__stage">
+      <span class="splash__one" aria-hidden="true">1</span>
+      <div class="splash__logo bounce">
+        <span class="splash__logo-mark" aria-hidden="true">GP</span>
+        <span class="splash__logo-text">Games PvP</span>
+      </div>
+      <p class="splash__tag" data-i18n="splashTag">Cargando experiencia #1…</p>
+    </div>
+    <div class="splash__progress" aria-hidden="true"><span></span></div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       2. NAVEGACIÓN SUPERIOR (STICKY)
+  ════════════════════════════════════════════ -->
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a class="brand" href="#/introduccion" aria-label="Games PvP — Inicio">
+        <span class="brand__badge" aria-hidden="true">1</span>
+        <span class="brand__name">Games&nbsp;PvP</span>
+      </a>
+
+      <nav class="nav" id="main-nav" aria-label="Menú principal">
+        <ul class="nav__list" id="nav-list">
+          <!-- Rellena dinámicamente con js/router.js (mantiene el orden de categorías) -->
+        </ul>
+      </nav>
+
+      <div class="navbar__tools">
+        <!-- ══ 3. BUSCADOR GLOBAL (lupa que se expande) ══ -->
+        <div class="search" id="search">
+          <button class="icon-btn search__toggle" id="search-toggle" aria-label="Abrir buscador" data-i18n-aria="openSearch" aria-expanded="false" aria-controls="search-input">
+            <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+          <input
+            type="search"
+            id="search-input"
+            class="search__input"
+            placeholder="Buscar… (Ctrl + K)"
+            data-i18n-ph="searchPlaceholder"
+            aria-label="Buscar en todo el sitio" data-i18n-aria="searchAria"
+            autocomplete="off"
+            role="combobox"
+            aria-expanded="false"
+            aria-controls="search-results"
+          />
+          <div class="search__panel" id="search-results" role="listbox" aria-label="Resultados de búsqueda" hidden></div>
+        </div>
+
+        <!-- ══ 4. PANEL DE CONFIGURACIÓN (engranaje) ══ -->
+        <button class="icon-btn" id="settings-btn" aria-label="Abrir configuración" data-i18n-aria="openSettings" aria-expanded="false" aria-controls="settings-drawer">
+          <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+
+        <!-- Hamburguesa (móvil) -->
+        <button class="icon-btn nav__burger" id="menu-btn" aria-label="Abrir menú" data-i18n-aria="openMenu" aria-expanded="false" aria-controls="main-nav">
+          <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════════
+       CONTENIDO PRINCIPAL (renderizado por router SPA)
+  ════════════════════════════════════════════ -->
+  <main id="main-content" class="main" tabindex="-1">
+    <!-- js/pages.js inyecta aquí cada categoría -->
+  </main>
+
+  <!-- ════════════════════════════════════════════
+       FOOTER + acceso a "Fuentes"
+  ════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="brand__badge" aria-hidden="true">1</span>
+        <div>
+          <strong>Games PvP</strong>
+          <p data-i18n="footerTagline">Mecánicas creadas por la comunidad, explicadas por los mejores jugadores.</p>
+        </div>
+      </div>
+      <nav class="footer__nav" aria-label="Enlaces de pie de página">
+        <a href="#/introduccion" data-i18n="navIntroduccion">Introducción</a>
+        <a href="#/minecraft-pvp">Minecraft PVP</a>
+        <a href="#/recomendaciones" data-i18n="navRecomendaciones">Recomendaciones</a>
+        <a href="#/fuentes" data-i18n="navFuentes">Fuentes</a>
+      </nav>
+      <p class="footer__copy">© <span id="year">2026</span> Games PvP. <span data-i18n="footerRights">Todos los derechos reservados.</span></p>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════════
+       4. PANEL DE CONFIGURACIÓN (DRAWER LATERAL)
+  ════════════════════════════════════════════ -->
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+  <aside class="drawer" id="settings-drawer" aria-label="Configuración" data-i18n-aria="settingsAria" aria-hidden="true">
+    <header class="drawer__header">
+      <h2 data-i18n="settingsTitle">Configuración</h2>
+      <button class="icon-btn" id="settings-close" aria-label="Cerrar configuración" data-i18n-aria="closeSettings">
+        <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </header>
+
+    <div class="drawer__body">
+
+      <!-- A) TIPOGRAFÍA -->
+      <section class="setting-block" aria-labelledby="set-typo">
+        <h3 id="set-typo" data-i18n="typographyTitle">Tipografía</h3>
+        <label class="radio-row">
+          <input type="radio" name="font-mode" value="default" checked />
+          <span data-i18n="fontDefault">Fuente predeterminada (según categoría)</span>
+        </label>
+        <label class="radio-row">
+          <input type="radio" name="font-mode" value="custom" />
+          <span data-i18n="fontCustom">Fuente personalizada</span>
+        </label>
+        <label class="field" for="font-select">
+          <span data-i18n="fontSelectLabel">Fuente personalizada</span>
+          <select id="font-select" disabled>
+            <option value="arial">Arial</option>
+            <option value="roboto">Roboto</option>
+            <option value="opensans">Open Sans</option>
+            <option value="pressstart">Press Start 2P</option>
+            <option value="alegreya">Alegreya Sans</option>
+            <option value="trajan">Trajan Pro (Cinzel)</option>
+            <option value="minecraft">Minecraft (Monocraft)</option>
+          </select>
+        </label>
+        <!-- Vista previa en vivo -->
+        <div class="font-preview" id="font-preview" aria-live="polite">
+          <strong data-i18n="previewTitle">Vista previa</strong>
+          <p class="font-preview__h">The quick brown fox — 1.9 PvP</p>
+          <p class="font-preview__p" data-i18n="previewBody">Los veloces zorros marrones saltan sobre el perro perezoso. Guías y técnicas.</p>
+        </div>
+      </section>
+
+      <!-- B) ESQUEMA DE COLORES -->
+      <section class="setting-block" aria-labelledby="set-color">
+        <h3 id="set-color" data-i18n="colorsTitle">Esquema de colores</h3>
+        <div class="theme-grid" role="radiogroup" aria-labelledby="set-color">
+          <label class="theme-card">
+            <input type="radio" name="theme" value="classic" checked />
+            <span class="theme-swatch theme-swatch--classic" aria-hidden="true"></span>
+            <span data-i18n="themeClassic">Clásico</span>
+          </label>
+          <label class="theme-card">
+            <input type="radio" name="theme" value="dark-purple" />
+            <span class="theme-swatch theme-swatch--purple" aria-hidden="true"></span>
+            <span data-i18n="themeDark">Oscuro Morado</span>
+          </label>
+          <label class="theme-card">
+            <input type="radio" name="theme" value="high-contrast" />
+            <span class="theme-swatch theme-swatch--contrast" aria-hidden="true"></span>
+            <span data-i18n="themeContrast">Alto Contraste</span>
+          </label>
+          <label class="theme-card">
+            <input type="radio" name="theme" value="custom" />
+            <span class="theme-swatch theme-swatch--custom" aria-hidden="true"></span>
+            <span data-i18n="themeCustom">Personalizado</span>
+          </label>
+        </div>
+        <div class="custom-colors" id="custom-colors" hidden>
+          <label class="field field--color"><span data-i18n="colorPrimary">Primario</span>
+            <input type="color" id="color-primary" value="#6a0dad" /></label>
+          <label class="field field--color"><span data-i18n="colorSecondary">Secundario</span>
+            <input type="color" id="color-secondary" value="#ffffff" /></label>
+          <label class="field field--color"><span data-i18n="colorAccent">Acento</span>
+            <input type="color" id="color-accent" value="#8b00ff" /></label>
+        </div>
+      </section>
+
+      <!-- C) IDIOMA -->
+      <section class="setting-block" aria-labelledby="set-lang">
+        <h3 id="set-lang" data-i18n="langTitle">Idioma</h3>
+        <div class="lang-toggle" role="radiogroup" aria-labelledby="set-lang">
+          <button type="button" class="lang-btn is-active" data-lang="es" aria-pressed="true">🇪🇸 ES</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">🇺🇸 EN</button>
+        </div>
+        <p class="setting-note" data-i18n="langNote">Solo se traduce el texto descriptivo y de interfaz. Los nombres de técnicas, categorías, productos y creadores se mantienen siempre en su idioma original.</p>
+      </section>
+
+      <!-- D) RESTAURAR -->
+      <section class="setting-block">
+        <button type="button" class="btn btn--ghost" id="reset-settings">
+          <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          <span data-i18n="resetDefaults">Restaurar valores predeterminados</span>
+        </button>
+      </section>
+    </div>
+  </aside>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
